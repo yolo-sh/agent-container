@@ -1,0 +1,23 @@
+syntax = "proto3";
+package yolo.agent_container;
+
+option go_package = "github.com/yolo-sh/agent-container/proto";
+
+service Agent {
+  rpc Init (InitRequest) returns (stream InitReply) {}
+}
+
+message InitRequest {
+  string env_repo_owner = 1;
+  string env_repo_name = 2;
+  repeated string env_repo_languages_used = 3;
+  string github_user_email = 4;
+  string user_full_name = 5;
+}
+
+message InitReply {
+  string log_line_header = 1;
+  string log_line = 2;
+  optional string github_ssh_public_key_content = 3;
+  optional string github_gpg_public_key_content = 4;
+}
