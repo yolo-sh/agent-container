@@ -51,7 +51,7 @@ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=p
 
 The `network manager` lets you access the services that run in the environment container network. 
 
-The `gRPC server`, on the other hand, is used to enable communication with the [agent](https://github.com/yolo-sh/agent) (via a shared unix socket `/yolo-config/agent-container-grpc.sock`).
+The `gRPC server`, on the other hand, is used to enable communication with the [host agent](https://github.com/yolo-sh/agent) (via a shared unix socket `/yolo-config/agent-container-grpc.sock`).
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/1233275/187863602-775b14db-f88d-4bfd-9b0b-c543643d020e.png" alt="infra" />
@@ -63,16 +63,11 @@ The `network manager` will poll `/proc/net/tcp` for open ports and redirect traf
 
 ### gRPC server
 
-The `gRPC server` will be accessed by the [agent](https://github.com/yolo-sh/agen) via a shared unix socket `/yolo-config/agent-container-grpc.sock`.
+The `gRPC server` will be accessed by the [host agent](https://github.com/yolo-sh/agent) via a shared unix socket `/yolo-config/agent-container-grpc.sock`.
 
 It is principally used to initialize the environment container as you can see in the service definition:
 
 ```proto
-syntax = "proto3";
-package yolo.agent_container;
-
-option go_package = "github.com/yolo-sh/agent-container/proto";
-
 service Agent {
   rpc Init (InitRequest) returns (stream InitReply) {}
 }
@@ -93,7 +88,7 @@ message InitReply {
 }
 ```
 
-The `Init` method will run a [shell script](https://github.com/yolo-sh/agent-container/blob/main/internal/grpcserver/init.sh) that will, among other things generate the `SSH` and `GPG` keys used in GitHub.
+The `Init` method will clone your repositories and run a [shell script](https://github.com/yolo-sh/agent-container/blob/main/internal/grpcserver/init.sh) that will, among other things, generate the `SSH` and `GPG` keys used in GitHub.
 
 **This method is idempotent**.
 
