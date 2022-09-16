@@ -74,10 +74,21 @@ func saveVSCodeWorkspaceConfigAsFile(
 		return err
 	}
 
-	return os.WriteFile(
+	err = os.WriteFile(
 		vscodeWorkspaceConfigFilePath,
 		vscodeWorkspaceConfigAsJSON,
-		os.FileMode(0644),
+		os.FileMode(0660),
+	)
+
+	if err != nil {
+		return err
+	}
+
+	// Overwrite umask.
+	// See: https://stackoverflow.com/questions/50257981/ioutils-writefile-not-respecting-permissions
+	return os.Chmod(
+		vscodeWorkspaceConfigFilePath,
+		0660,
 	)
 }
 
