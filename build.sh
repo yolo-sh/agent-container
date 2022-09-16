@@ -13,7 +13,7 @@ do
 	platform_parts=(${platform//\// })
 	platform_os="${platform_parts[0]}"
 	platform_arch="${platform_parts[1]}"
-	bin_name="agent-${platform_os}-${platform_arch}"
+	bin_name="agent-container-${platform_os}-${platform_arch}"
 
   log "Building container agent for ${platform_os}/${platform_arch}..."
 
