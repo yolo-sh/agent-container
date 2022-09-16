@@ -22,7 +22,7 @@ func ListenAndServe(serverAddrProtocol, serverAddr string) error {
 	}
 
 	if serverAddrProtocol == "unix" { // Make sure that the socket could be reached by the agent in the host
-		if err := os.Chmod(serverAddr, 0770); err != nil {
+		if err := os.Chmod(serverAddr, 0660); err != nil {
 			return fmt.Errorf("failed to set socket permissions: %v", err)
 		}
 	}
