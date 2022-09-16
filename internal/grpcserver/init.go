@@ -11,6 +11,7 @@ import (
 	"path"
 
 	"github.com/yolo-sh/agent-container/constants"
+	"github.com/yolo-sh/agent-container/entities"
 	"github.com/yolo-sh/agent-container/internal/env"
 	"github.com/yolo-sh/agent-container/proto"
 )
@@ -121,7 +122,7 @@ func (*agentServer) Init(
 		return err
 	}
 
-	workspaceConfig := env.NewWorkspaceConfig()
+	workspaceConfig := entities.NewWorkspaceConfig()
 
 	return env.PrepareWorkspace(
 		workspaceConfig,

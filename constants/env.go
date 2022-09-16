@@ -6,7 +6,7 @@ const (
 
 	YoloConfigDirPath = "/yolo-config"
 
-	DockerImageTag  = "0.0.2"
+	DockerImageTag  = "0.0.3"
 	DockerImageName = "ghcr.io/yolo-sh/workspace-full:" + DockerImageTag
 
 	DockerContainerName      = "yolo-env-container"

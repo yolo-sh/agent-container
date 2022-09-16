@@ -4,11 +4,12 @@ import (
 	"path/filepath"
 
 	"github.com/yolo-sh/agent-container/constants"
+	"github.com/yolo-sh/agent-container/entities"
 	"github.com/yolo-sh/agent-container/internal/system"
 )
 
 func PrepareWorkspace(
-	workspaceConfig *WorkspaceConfig,
+	workspaceConfig *entities.WorkspaceConfig,
 	repoOwner string,
 	repoName string,
 	languagesUsedInRepo []string,
@@ -46,7 +47,7 @@ func PrepareWorkspace(
 		return err
 	}
 
-	return SaveWorkspaceConfigAsFile(
+	return entities.SaveWorkspaceConfigAsFile(
 		constants.WorkspaceConfigFilePath,
 		workspaceConfig,
 	)
@@ -55,7 +56,7 @@ func PrepareWorkspace(
 func addRepoToWorkspace(
 	repoOwner string,
 	repoName string,
-	workspaceConfig *WorkspaceConfig,
+	workspaceConfig *entities.WorkspaceConfig,
 	vscodeWorkspaceConfig *VSCodeWorkspaceConfig,
 ) error {
 
@@ -74,7 +75,7 @@ func addRepoToWorkspace(
 		return err
 	}
 
-	workspaceConfigRepository := WorkspaceConfigRepository{
+	workspaceConfigRepository := entities.WorkspaceConfigRepository{
 		Owner:       repoOwner,
 		Name:        repoName,
 		RootDirPath: repoDirPathInWorkspace,
