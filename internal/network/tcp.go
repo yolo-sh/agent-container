@@ -14,12 +14,6 @@ const (
 	tcpConnStatusListening   tcpConnStatus = 10
 )
 
-type tcpPort uint64
-
-const (
-	tcpLocalhostIpv4Addr = "127.0.0.1"
-)
-
 func getOpenedTCPConns() (procfs.NetTCP, error) {
 	proc, err := procfs.NewFS("/proc")
 	if err != nil {

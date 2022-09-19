@@ -24,7 +24,7 @@ func main() {
 		)
 
 		for {
-			err := network.ReconcileProxiesState()
+			err := network.ReconcileLocalhostProxiesState()
 
 			if err != nil {
 				log.Fatalf("%v", err)
